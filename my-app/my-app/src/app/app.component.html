@@ -1,1 +1,7 @@
-<h1>Hello world({{ title }})</h1>
+<div *ngIf="users !== undefined">
+  <div>
+    <li *ngFor="let user of users">
+      {{ user }}
+    </li>
+  </div>
+</div>
