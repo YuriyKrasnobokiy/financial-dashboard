@@ -7,14 +7,14 @@ import { DataService } from './app.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  users: string[] = [];
+  data: any;
 
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
     this.dataService.getUsers().subscribe((data: any[]) => {
       // Вибираємо значення ключа "user" та мапимо їх до масиву users
-      this.users = data.map((item: any) => item.user);
+      this.data = data.map((item: any) => item);
     });
   }
 }

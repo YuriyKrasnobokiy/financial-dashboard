@@ -1,7 +1,24 @@
-<div *ngIf="users !== undefined">
-  <div>
-    <li *ngFor="let user of users">
-      {{ user }}
-    </li>
-  </div>
+<div>
+  <table class="table" border="1">
+    <thead>
+      <tr>
+        <th>Клієнт</th>
+        <th>Дата видачі кредиту</th>
+        <th>Дата погашення кредиту</th>
+        <th>Фактична дата погашення кредиту</th>
+        <th>Тіло кредиту (грн)</th>
+        <th>Відсоток (грн)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data">
+        <td>{{ item.user }}</td>
+        <td>{{ item.issuance_date }}</td>
+        <td>{{ item.return_date }}</td>
+        <td>{{ item.actual_return_date }}</td>
+        <td>{{ item.body }}</td>
+        <td>{{ item.percent }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
