@@ -12,15 +12,24 @@
 .statistic {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   width: 100%;
   max-width: 500px;
-  /* text-align: start; */
+  margin: 0 auto;
+  padding: 20px 0;
 }
 
 .table {
   margin: 0 auto;
   width: 100%;
+}
+
+.filter-wrap {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .filter {
@@ -30,6 +39,52 @@
   margin-bottom: 36px;
 }
 
-/* p {
+.header {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  /* padding: 16px 0; */
+
+  border-bottom: 1px solid black;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  display: block;
+  color: inherit;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.14;
+  letter-spacing: 0.02em;
+
+  padding-top: 32px;
+  padding-bottom: 32px;
+  transition: color 0.3s linear;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.nav-link:not(:last-child) {
+  margin-right: 20px;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: rgb(5, 150, 235);
+}
+
+.home-title {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: 0.02em;
   text-align: center;
-} */
+}

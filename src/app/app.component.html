@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div class="statistic">
     <p>Загальна кількість виданих кредитів: {{ totalIssuedCredits }}</p>
     <p>Кількість прострочених кредитів: {{ overdueCredits }}</p>
@@ -7,7 +7,7 @@
       Середня сума видачі кредитів: {{ averageIssuedAmount | number : "1.2-2" }}
     </p>
     <p>
-      Загальна сума грошей виданих кредитів:
+      Загальна сума виданих кредитів:
       {{ totalIssuedAmount | currency : "UAH" }}
     </p>
     <p>
@@ -15,25 +15,25 @@
       {{ totalInterestAmount | currency : "UAH" }}
     </p>
   </div>
+  <div class="filter-wrap">
+    <div class="filter">
+      <p>Фільтр періоду дат видачі кредиту</p>
+      <input type="date" (change)="updateFromDateFilter()" />
+      <input type="date" (change)="updateToDateFilter()" />
+    </div>
 
-  <div class="filter">
-    <p>Фільтр періоду дат видачі кредиту:</p>
-    <input type="date" (change)="updateFromDateFilter()" />
-    <input type="date" (change)="updateToDateFilter()" />
+    <div class="filter">
+      <p>Фільтр періоду дат повернення кредиту</p>
+      <input type="date" />
+      <input type="date" />
+    </div>
+
+    <div class="filter">
+      <p>Фільтр прострочених кредитів</p>
+      <input type="date" />
+      <input type="date" />
+    </div>
   </div>
-
-  <div class="filter">
-    <p>Фільтр періоду дат повернення кредиту:</p>
-    <input type="date" />
-    <input type="date" />
-  </div>
-
-  <div class="filter">
-    <p>Фільтр періоду дат видачі кредиту:</p>
-    <input type="date" />
-    <input type="date" />
-  </div>
-
   <table class="table" border="1">
     <thead>
       <tr>
@@ -56,4 +56,8 @@
       </tr>
     </tbody>
   </table>
+</div> -->
+<div>
+  <app-header></app-header>
+  <router-outlet></router-outlet>
 </div>
