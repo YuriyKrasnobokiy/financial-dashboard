@@ -45,13 +45,13 @@
   align-items: center;
   width: 100%;
   margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 .filter {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 36px;
 }
 
 .filter-btn {
@@ -67,6 +67,12 @@
   transition: 0.3s linear;
   outline: none;
   margin-top: 20px;
+}
+
+.filter-title {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 14px;
 }
 
 .filter-btn:focus,
