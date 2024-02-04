@@ -9,10 +9,11 @@ import { map } from 'rxjs/operators';
     <div class="container">
       <div class="filter-wrap">
         <div class="filter">
-          <p>Фільтр періоду дат видачі кредиту</p>
+          <h3>Фільтр періоду дат видачі кредиту</h3>
           <input type="date" #fromIssuanceDate />
           <input type="date" #toIssuanceDate />
           <button
+            class="filter-btn"
             (click)="
               applyFilters(
                 'issuance',
@@ -26,10 +27,11 @@ import { map } from 'rxjs/operators';
         </div>
 
         <div class="filter">
-          <p>Фільтр періоду дат повернення кредиту</p>
+          <h3>Фільтр періоду дат повернення кредиту</h3>
           <input type="date" #fromReturnDate />
           <input type="date" #toReturnDate />
           <button
+            class="filter-btn"
             (click)="
               applyFilters('return', fromReturnDate.value, toReturnDate.value)
             "
@@ -39,10 +41,11 @@ import { map } from 'rxjs/operators';
         </div>
 
         <div class="filter">
-          <p>Фільтр прострочених кредитів</p>
+          <h3>Фільтр прострочених кредитів</h3>
           <input type="date" #fromOverdueDate />
           <input type="date" #toOverdueDate />
           <button
+            class="filter-btn"
             (click)="
               applyFilters(
                 'overdue',

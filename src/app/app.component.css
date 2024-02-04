@@ -54,6 +54,42 @@
   margin-bottom: 36px;
 }
 
+.filter-btn {
+  width: 100%;
+  max-width: 200px;
+  font-size: 14px;
+  color: whitesmoke;
+  background-color: #59a4f5;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: 0.3s linear;
+  outline: none;
+  margin-top: 20px;
+}
+
+.filter-btn:focus,
+.filter-btn:hover {
+  background-color: #4089f3;
+}
+
+input[type="date"] {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 18px;
+  max-width: 220px;
+  outline: none;
+}
+
+input[type="date"]:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
 .header {
   display: flex;
   justify-content: start;
@@ -61,7 +97,6 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  /* padding: 16px 0; */
 
   border-bottom: 1px solid black;
 }
