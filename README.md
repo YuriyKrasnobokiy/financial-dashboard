@@ -1,5 +1,11 @@
 # MyApp
 
+!!!
+1 ДЛЯ ПОЧАТКУ РОБОТИ СКЛОНУЙТЕ СОБІ РЕПОЗИТОРІЙ НА МАШИНУ.
+2 ВСТАНОВІТЬ ЗАЛЕЖНОСТІ (В КОНСОЛІ ПРОПИСАТИ npm install)
+3 В КОНСОЛІ ПРОПИШІТЬ КОМАНДУ npm start (або ng serve)
+4 ЯКЩО АВТОМАТИЧНО НЕ ВІДКРИЛАСЬ ВКЛАДКА В БРАУЗЕРІ ТО ПРОПИШІТЬ В АДРЕСНІЙ СТРОЦІ БРАУЗЕРА http://localhost:4200/financial-dashboard
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.10.
 
 ## Development server
