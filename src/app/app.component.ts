@@ -25,24 +25,25 @@ export class AppComponent implements OnInit {
   averageIssuedAmount: number = 0;
   totalIssuedAmount: number = 0;
   totalInterestAmount: number = 0;
+
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.loadData();
+    this.loadData(); // Викликати метод при завантаженні сторінки
   }
 
   loadData() {
     this.dataService.getUsers().subscribe((data: any[]) => {
       this.data = data.map((item: any) => item);
-      this.calculateMetrics();
+      this.applyFilters(); // Застосувати фільтри після завантаження даних
     });
   }
 
   applyFilters() {
-    combineLatest([this.dataService.getUsers(), this.issuanceDateFilter$])
+    combineLatest([this.issuanceDateFilter$])
       .pipe(
-        map(([data, issuanceDateFilter]) => {
-          this.filteredData = data.filter((item: any) => {
+        map(([issuanceDateFilter]) => {
+          this.filteredData = this.data.filter((item: any) => {
             const issuanceDate = new Date(item.issuance_date);
             return this.isDateInRange(issuanceDate, issuanceDateFilter);
           });
@@ -77,7 +78,6 @@ export class AppComponent implements OnInit {
     }
     return date >= range.fromDate && date <= range.toDate;
   }
-
   calculateMetrics(): void {
     this.totalIssuedCredits = this.filteredData.length; // Кількість виданих кредитів
 
