@@ -1,8 +1,37 @@
-<div>
+<div class="container">
+  <div class="statistic">
+    <p>Загальна кількість виданих кредитів: {{ totalIssuedCredits }}</p>
+    <p>Кількість прострочених кредитів: {{ overdueCredits }}</p>
+    <p>Кількість погашених кредитів: {{ repaidCredits }}</p>
+    <p>
+      Середня сума видачі кредитів: {{ averageIssuedAmount | number : "1.2-2" }}
+    </p>
+    <p>
+      Загальна сума грошей виданих кредитів:
+      {{ totalIssuedAmount | currency : "UAH" }}
+    </p>
+    <p>
+      Загальна сума нарахованих відсотків:
+      {{ totalInterestAmount | currency : "UAH" }}
+    </p>
+  </div>
+
   <div class="filter">
-    Фільтр періоду дат видачі кредиту:
-    <input type="date" (change)="updateIssuanceDateFilter()" />
-    <input type="date" (change)="updateIssuanceDateFilter()" />
+    <p>Фільтр періоду дат видачі кредиту:</p>
+    <input type="date" (change)="updateFromDateFilter()" />
+    <input type="date" (change)="updateToDateFilter()" />
+  </div>
+
+  <div class="filter">
+    <p>Фільтр періоду дат повернення кредиту:</p>
+    <input type="date" />
+    <input type="date" />
+  </div>
+
+  <div class="filter">
+    <p>Фільтр періоду дат видачі кредиту:</p>
+    <input type="date" />
+    <input type="date" />
   </div>
 
   <table class="table" border="1">

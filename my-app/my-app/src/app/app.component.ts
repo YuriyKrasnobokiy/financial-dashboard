@@ -19,6 +19,12 @@ export class AppComponent implements OnInit {
     toDate: null,
   });
 
+  totalIssuedCredits: number = 0;
+  overdueCredits: number = 0;
+  repaidCredits: number = 0;
+  averageIssuedAmount: number = 0;
+  totalIssuedAmount: number = 0;
+  totalInterestAmount: number = 0;
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
@@ -28,7 +34,7 @@ export class AppComponent implements OnInit {
   loadData() {
     this.dataService.getUsers().subscribe((data: any[]) => {
       this.data = data.map((item: any) => item);
-      this.applyFilters();
+      this.calculateMetrics();
     });
   }
 
@@ -40,14 +46,21 @@ export class AppComponent implements OnInit {
             const issuanceDate = new Date(item.issuance_date);
             return this.isDateInRange(issuanceDate, issuanceDateFilter);
           });
-          // console.log('Data filtered:', this.filteredData);
+          this.calculateMetrics();
         })
       )
       .subscribe();
   }
 
-  updateIssuanceDateFilter(): void {
-    // console.log('Filter updated');
+  updateFromDateFilter(): void {
+    const fromDate = this.issuanceDateFilter$.value.fromDate || null;
+    const toDate = this.issuanceDateFilter$.value.toDate || null;
+
+    this.issuanceDateFilter$.next({ fromDate, toDate });
+    this.applyFilters();
+  }
+
+  updateToDateFilter(): void {
     const fromDate = this.issuanceDateFilter$.value.fromDate || null;
     const toDate = this.issuanceDateFilter$.value.toDate || null;
 
@@ -63,5 +76,38 @@ export class AppComponent implements OnInit {
       return true;
     }
     return date >= range.fromDate && date <= range.toDate;
+  }
+
+  calculateMetrics(): void {
+    this.totalIssuedCredits = this.filteredData.length; // Кількість виданих кредитів
+
+    // Розрахунок кількості прострочених та погашених кредитів
+    this.overdueCredits = this.filteredData.filter(
+      (item: any) => !item.actual_return_date
+    ).length;
+
+    this.repaidCredits = this.filteredData.filter(
+      (item: any) => item.actual_return_date
+    ).length;
+
+    // Розрахунок середньої та загальної сум грошей виданих кредитів
+    const issuedAmounts = this.filteredData.map((item: any) => item.body);
+    this.averageIssuedAmount =
+      issuedAmounts.reduce(
+        (total: number, amount: number) => total + amount,
+        0
+      ) / (issuedAmounts.length || 1); // Запобігаємо діленню на нуль
+
+    this.totalIssuedAmount = issuedAmounts.reduce(
+      (total: number, amount: number) => total + amount,
+      0
+    );
+
+    // Розрахунок загальної суми нарахованих відсотків
+    const interestAmounts = this.filteredData.map((item: any) => item.percent);
+    this.totalInterestAmount = interestAmounts.reduce(
+      (total: number, amount: number) => total + amount,
+      0
+    );
   }
 }
