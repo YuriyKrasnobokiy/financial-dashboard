@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DataService } from './app.service';
-import { BehaviorSubject, combineLatest, map, startWith } from 'rxjs';
+import { BehaviorSubject, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-table',
@@ -9,20 +10,49 @@ import { BehaviorSubject, combineLatest, map, startWith } from 'rxjs';
       <div class="filter-wrap">
         <div class="filter">
           <p>Фільтр періоду дат видачі кредиту</p>
-          <input type="date" (change)="updateFromDateFilter()" />
-          <input type="date" (change)="updateToDateFilter()" />
+          <input type="date" #fromIssuanceDate />
+          <input type="date" #toIssuanceDate />
+          <button
+            (click)="
+              applyFilters(
+                'issuance',
+                fromIssuanceDate.value,
+                toIssuanceDate.value
+              )
+            "
+          >
+            Застосувати фільтр
+          </button>
         </div>
 
         <div class="filter">
           <p>Фільтр періоду дат повернення кредиту</p>
-          <input type="date" />
-          <input type="date" />
+          <input type="date" #fromReturnDate />
+          <input type="date" #toReturnDate />
+          <button
+            (click)="
+              applyFilters('return', fromReturnDate.value, toReturnDate.value)
+            "
+          >
+            Застосувати фільтр
+          </button>
         </div>
 
         <div class="filter">
           <p>Фільтр прострочених кредитів</p>
-          <input type="date" />
-          <input type="date" />
+          <input type="date" #fromOverdueDate />
+          <input type="date" #toOverdueDate />
+          <button
+            (click)="
+              applyFilters(
+                'overdue',
+                fromOverdueDate?.valueAsDate?.toISOString(),
+                toOverdueDate?.valueAsDate?.toISOString()
+              )
+            "
+          >
+            Застосувати фільтр
+          </button>
         </div>
       </div>
 
@@ -55,13 +85,6 @@ import { BehaviorSubject, combineLatest, map, startWith } from 'rxjs';
 export class AppTableComponent implements OnInit {
   data: any;
   filteredData: any[] = [];
-  issuanceDateFilter$ = new BehaviorSubject<{
-    fromDate: Date | null;
-    toDate: Date | null;
-  }>({
-    fromDate: null,
-    toDate: null,
-  });
 
   constructor(
     private dataService: DataService,
@@ -79,27 +102,42 @@ export class AppTableComponent implements OnInit {
     });
   }
 
-  applyFilters() {
-    combineLatest([this.issuanceDateFilter$])
-      .pipe(
-        map(([issuanceDateFilter]) => {
-          this.filteredData = this.data.filter((item: any) => {
-            const issuanceDate = new Date(item.issuance_date);
-            return this.isDateInRange(issuanceDate, issuanceDateFilter);
-          });
-        })
-      )
-      .subscribe(() => {
-        this.cdr.detectChanges();
+  applyFilters(type?: string, fromDate?: string, toDate?: string): void {
+    if (this.data) {
+      this.filteredData = this.data.filter((item: any) => {
+        const issuanceDate = new Date(item.issuance_date);
+        const returnDate = new Date(item.return_date);
+        const currentDate = new Date();
+        const actualReturnDate = item.actual_return_date
+          ? new Date(item.actual_return_date)
+          : null;
+
+        switch (type) {
+          case 'issuance':
+            return this.isDateInRange(issuanceDate, {
+              fromDate: fromDate ? new Date(fromDate) : null,
+              toDate: toDate ? new Date(toDate) : null,
+            });
+
+          case 'return':
+            return this.isDateInRange(returnDate, {
+              fromDate: fromDate ? new Date(fromDate) : null,
+              toDate: toDate ? new Date(toDate) : null,
+            });
+
+          case 'overdue':
+            return (
+              (actualReturnDate && actualReturnDate > returnDate) ||
+              (!actualReturnDate && returnDate < currentDate)
+            );
+
+          default:
+            return true;
+        }
       });
-  }
 
-  updateFromDateFilter(): void {
-    this.applyFilters();
-  }
-
-  updateToDateFilter(): void {
-    this.applyFilters();
+      this.cdr.detectChanges();
+    }
   }
 
   isDateInRange(

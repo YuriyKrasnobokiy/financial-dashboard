@@ -9,13 +9,28 @@
   margin: 0 auto;
 }
 
+.home-title {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
 .statistic {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 500px;
+  max-width: 540px;
   margin: 0 auto;
   padding: 20px 0;
+}
+
+.stat-text {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: 0.02em;
 }
 
 .table {
@@ -79,12 +94,4 @@
 .nav-link:hover,
 .nav-link:focus {
   color: rgb(5, 150, 235);
-}
-
-.home-title {
-  font-size: 42px;
-  font-weight: 700;
-  line-height: 1.14;
-  letter-spacing: 0.02em;
-  text-align: center;
 }

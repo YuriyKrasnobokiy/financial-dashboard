@@ -8,6 +8,7 @@ import { AppStatisticsComponent } from './app-statistics.component';
 import { AppTableComponent } from './app-table.component';
 import { AppHeaderComponent } from './app-header.component';
 import { DataService } from './app.service';
+import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: '', component: AppStartComponent },
@@ -23,7 +24,12 @@ const appRoutes: Routes = [
     AppStatisticsComponent,
     AppTableComponent,
   ],
-  imports: [BrowserModule, RouterModule.forRoot(appRoutes), HttpClientModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule,
+  ],
   providers: [DataService],
   bootstrap: [AppComponent],
 })

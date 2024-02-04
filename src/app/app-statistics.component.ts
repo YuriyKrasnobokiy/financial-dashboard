@@ -5,20 +5,24 @@ import { DataService } from './app.service';
   selector: 'app-statistics',
   template: `
     <div class="statistic">
-      <p>Загальна кількість виданих кредитів: {{ totalIssuedCredits }}</p>
-      <p>Кількість прострочених кредитів: {{ overdueCredits }}</p>
-      <p>Кількість погашених кредитів: {{ repaidCredits }}</p>
-      <p>
+      <p class="stat-text">
+        Загальна кількість виданих кредитів: {{ totalIssuedCredits }}
+      </p>
+      <p class="stat-text">
+        Кількість прострочених кредитів: {{ overdueCredits }}
+      </p>
+      <p class="stat-text">Кількість погашених кредитів: {{ repaidCredits }}</p>
+      <p class="stat-text">
         Середня сума видачі кредитів:
-        {{ averageIssuedAmount | number : '1.2-2' }}
+        {{ averageIssuedAmount | number : '1.2-2' }} грн
       </p>
-      <p>
+      <p class="stat-text">
         Загальна сума виданих кредитів:
-        {{ totalIssuedAmount | currency : 'UAH' }}
+        {{ totalIssuedAmount }} грн
       </p>
-      <p>
+      <p class="stat-text">
         Загальна сума нарахованих відсотків:
-        {{ totalInterestAmount | currency : 'UAH' }}
+        {{ totalInterestAmount }} грн
       </p>
     </div>
   `,
