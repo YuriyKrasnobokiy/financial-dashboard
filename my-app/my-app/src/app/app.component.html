@@ -1,4 +1,10 @@
 <div>
+  <div class="filter">
+    Фільтр періоду дат видачі кредиту:
+    <input type="date" (change)="updateIssuanceDateFilter()" />
+    <input type="date" (change)="updateIssuanceDateFilter()" />
+  </div>
+
   <table class="table" border="1">
     <thead>
       <tr>
@@ -11,7 +17,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of data">
+      <tr *ngFor="let item of filteredData">
         <td>{{ item.user }}</td>
         <td>{{ item.issuance_date }}</td>
         <td>{{ item.return_date }}</td>

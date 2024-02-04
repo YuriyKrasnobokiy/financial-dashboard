@@ -8,7 +8,7 @@ import { DataService } from './app.service';
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, HttpClientModule],
-  providers: [DataService], // Додайте сервіс до провайдерів
+  providers: [DataService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
